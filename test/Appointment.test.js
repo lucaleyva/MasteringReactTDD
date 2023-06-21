@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { act } from "react-dom/test-utils";
-import { Appointment, AppointmentsDayView } from "../src/Appointment";
+import { Appointment, AppointmentsDayView } from "../src/AppointmentsDayView";
 
 describe("Appointment", () => {
   let container;
@@ -24,6 +24,48 @@ describe("Appointment", () => {
     act(() => ReactDOM.createRoot(container).render(<Appointment customer={customer} />));
     expect(document.body.textContent).toContain("Jordan");
   });
+
+  it("renders a customer last name", () => {
+    const customer = { lastName: "Smith" };
+    act(() => ReactDOM.createRoot(container).render(<Appointment customer={customer} />));
+    expect(document.body.textContent).toContain("Smith");
+  });
+
+  it("renders a customer phone number", () => {
+    const customer = { phoneNumber: "12345678910" };
+    act(() => ReactDOM.createRoot(container).render(<Appointment customer={customer} />));
+    expect(document.body.textContent).toContain("12345678910");
+  });
+
+  it("renders a customer stylist", () => {
+    const customer = { stylist: "Jen" };
+    act(() => ReactDOM.createRoot(container).render(<Appointment customer={customer} />));
+    expect(document.body.textContent).toContain("Jen");
+  });
+
+  it("renders a customer service", () => {
+    const customer = { service: "cut" };
+    act(() => ReactDOM.createRoot(container).render(<Appointment customer={customer} />));
+    expect(document.body.textContent).toContain("cut");
+  });
+
+  it("renders a customer notes", () => {
+    const customer = { notes: "don't shave" };
+    act(() => ReactDOM.createRoot(container).render(<Appointment customer={customer} />));
+    expect(document.body.textContent).toContain("don't shave");
+  });
+
+  it("renders all customer data", () => {
+      const customer = { firstName: "Jordan", lastName: "Smith", phoneNumber: "12345678910", stylist: "Jen", service: "cut", notes: "don't shave" };
+      act(() => ReactDOM.createRoot(container).render(<Appointment customer={customer} />));
+      expect(document.body.textContent).toContain("Jordan");
+      expect(document.body.textContent).toContain("Smith");
+      expect(document.body.textContent).toContain("12345678910");
+      expect(document.body.textContent).toContain("Jen");
+      expect(document.body.textContent).toContain("cut");
+      expect(document.body.textContent).toContain("don't shave");
+  });
+
 });
 
 describe("AppointmentsDayView", () => {

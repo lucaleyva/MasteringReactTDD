@@ -1,6 +1,33 @@
 import React, {useState} from "react";
 
-export const Appointment = ({ customer }) => <div>{customer.firstName}</div>;
+// stylist, service, and notes are not appearing in the UI for some reason
+export const Appointment = ({ customer }) =>
+    <div>
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        {customer.firstName}
+                    </td>
+                    <td>
+                        {customer.lastName}
+                    </td>
+                    <td>
+                        {customer.phoneNumber}
+                    </td>
+                    <td>
+                        {customer.stylist}
+                    </td>
+                    <td>
+                        {customer.service}
+                    </td>
+                    <td>
+                        {customer.notes}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>;
 
 const appointmentTimeofDay = (startsAt) => {
     const [h, m] = new Date(startsAt).toTimeString().split(":");
