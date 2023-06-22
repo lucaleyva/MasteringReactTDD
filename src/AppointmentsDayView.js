@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 
-// stylist, service, and notes are not appearing in the UI for some reason
-export const Appointment = ({ customer }) =>
+export const Appointment = ({ customer, service, stylist, notes, startsAt }) =>
     <div>
+        <h3>{appointmentTimeofDay(startsAt)}</h3>
         <table>
             <tbody>
                 <tr>
@@ -16,13 +16,13 @@ export const Appointment = ({ customer }) =>
                         {customer.phoneNumber}
                     </td>
                     <td>
-                        {customer.stylist}
+                        {stylist}
                     </td>
                     <td>
-                        {customer.service}
+                        {service}
                     </td>
                     <td>
-                        {customer.notes}
+                        {notes}
                     </td>
                 </tr>
             </tbody>

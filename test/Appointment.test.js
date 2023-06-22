@@ -38,26 +38,35 @@ describe("Appointment", () => {
   });
 
   it("renders a customer stylist", () => {
-    const customer = { stylist: "Jen" };
-    act(() => ReactDOM.createRoot(container).render(<Appointment customer={customer} />));
+    const stylist = "Jen";
+    act(() => ReactDOM.createRoot(container).render(<Appointment customer={{}} stylist={stylist} />));
     expect(document.body.textContent).toContain("Jen");
   });
 
   it("renders a customer service", () => {
-    const customer = { service: "cut" };
-    act(() => ReactDOM.createRoot(container).render(<Appointment customer={customer} />));
+    const service = "cut";
+    act(() => ReactDOM.createRoot(container).render(<Appointment customer={{}} service={service} />));
     expect(document.body.textContent).toContain("cut");
   });
 
   it("renders a customer notes", () => {
-    const customer = { notes: "don't shave" };
-    act(() => ReactDOM.createRoot(container).render(<Appointment customer={customer} />));
+    const notes = "don't shave";
+    act(() => ReactDOM.createRoot(container).render(<Appointment customer={{}} notes={notes} />));
     expect(document.body.textContent).toContain("don't shave");
   });
 
+  it("renders an appointment start time", () => {
+    const startsAt = 1687442400000;
+    act(() => ReactDOM.createRoot(container).render(<Appointment customer={{}} startsAt={startsAt} />));
+    expect(document.body.textContent).toContain("10:00");
+  });
+
   it("renders all customer data", () => {
-      const customer = { firstName: "Jordan", lastName: "Smith", phoneNumber: "12345678910", stylist: "Jen", service: "cut", notes: "don't shave" };
-      act(() => ReactDOM.createRoot(container).render(<Appointment customer={customer} />));
+    const customer = { firstName: "Jordan", lastName: "Smith", phoneNumber: "12345678910" };
+    const stylist = "Jen";
+    const service = "cut";
+    const notes = "don't shave";
+    act(() => ReactDOM.createRoot(container).render(<Appointment customer={customer} stylist={stylist} service={service} notes={notes} />));
       expect(document.body.textContent).toContain("Jordan");
       expect(document.body.textContent).toContain("Smith");
       expect(document.body.textContent).toContain("12345678910");
