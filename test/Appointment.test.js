@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { act } from "react-dom/test-utils";
 import { Appointment, AppointmentsDayView } from "../src/AppointmentsDayView";
+import { sampleAppointments } from "../src/sampleData";
 
 describe("Appointment", () => {
   let container;
@@ -13,66 +14,66 @@ describe("Appointment", () => {
 
   const render = (component) => act(() => ReactDOM.createRoot(container).render(component));
 
+
+  const appt = sampleAppointments[0];
+  // const [customer, stylist, service, notes] = appt;
+  const customer = appt.customer;
+  const stylist = appt.stylist;
+  const service = appt.service;
+  const notes = appt.notes;
+  const startsAt = appt.startsAt;
+  const firstApptTime = "9:00";
+
   it("renders another customer first name", () => {
     const customer = { firstName: "Ashley" };
-    act(() => ReactDOM.createRoot(container).render(<Appointment customer={customer} />));
-    expect(document.body.textContent).toContain("Ashley");
+    render(<Appointment customer={customer} />);
+    expect(document.body.textContent).toContain(customer.firstName);
   });
 
   it("renders another customer first name", () => {
-    const customer = { firstName: "Jordan" };
-    act(() => ReactDOM.createRoot(container).render(<Appointment customer={customer} />));
-    expect(document.body.textContent).toContain("Jordan");
+    render(<Appointment customer={customer} />);
+    expect(document.body.textContent).toContain(customer.firstName);
   });
 
   it("renders a customer last name", () => {
-    const customer = { lastName: "Smith" };
-    act(() => ReactDOM.createRoot(container).render(<Appointment customer={customer} />));
-    expect(document.body.textContent).toContain("Smith");
+    render(<Appointment customer={customer} />);
+    expect(document.body.textContent).toContain(customer.lastName);
   });
 
   it("renders a customer phone number", () => {
-    const customer = { phoneNumber: "12345678910" };
-    act(() => ReactDOM.createRoot(container).render(<Appointment customer={customer} />));
-    expect(document.body.textContent).toContain("12345678910");
+    render(<Appointment customer={customer} />);
+    expect(document.body.textContent).toContain(customer.phoneNumber);
   });
 
   it("renders a customer stylist", () => {
-    const stylist = "Jen";
-    act(() => ReactDOM.createRoot(container).render(<Appointment customer={{}} stylist={stylist} />));
-    expect(document.body.textContent).toContain("Jen");
+    render(<Appointment customer={{}} stylist={stylist} />);
+    expect(document.body.textContent).toContain(stylist);
   });
 
   it("renders a customer service", () => {
-    const service = "cut";
-    act(() => ReactDOM.createRoot(container).render(<Appointment customer={{}} service={service} />));
-    expect(document.body.textContent).toContain("cut");
+    render(<Appointment customer={{}} service={service} />);
+    expect(document.body.textContent).toContain(service);
   });
 
   it("renders a customer notes", () => {
-    const notes = "don't shave";
-    act(() => ReactDOM.createRoot(container).render(<Appointment customer={{}} notes={notes} />));
-    expect(document.body.textContent).toContain("don't shave");
+    render(<Appointment customer={{}} notes={notes} />);
+    expect(document.body.textContent).toContain(notes);
   });
 
   it("renders an appointment start time", () => {
-    const startsAt = 1687442400000;
-    act(() => ReactDOM.createRoot(container).render(<Appointment customer={{}} startsAt={startsAt} />));
-    expect(document.body.textContent).toContain("10:00");
+    render(<Appointment customer={{}} startsAt={startsAt} />);
+    expect(document.body.textContent).toContain(firstApptTime);
   });
 
   it("renders all customer data", () => {
-    const customer = { firstName: "Jordan", lastName: "Smith", phoneNumber: "12345678910" };
-    const stylist = "Jen";
-    const service = "cut";
-    const notes = "don't shave";
-    act(() => ReactDOM.createRoot(container).render(<Appointment customer={customer} stylist={stylist} service={service} notes={notes} />));
-      expect(document.body.textContent).toContain("Jordan");
-      expect(document.body.textContent).toContain("Smith");
-      expect(document.body.textContent).toContain("12345678910");
-      expect(document.body.textContent).toContain("Jen");
-      expect(document.body.textContent).toContain("cut");
-      expect(document.body.textContent).toContain("don't shave");
+    render(<Appointment customer={customer} stylist={stylist} service={service} notes={notes} startsAt={startsAt}/>);
+    expect(document.body.textContent).toContain(customer.firstName);
+    expect(document.body.textContent).toContain(customer.lastName);
+    expect(document.body.textContent).toContain(customer.phoneNumber);
+    expect(document.body.textContent).toContain(stylist);
+    expect(document.body.textContent).toContain(service);
+    expect(document.body.textContent).toContain(notes);
+    expect(document.body.textContent).toContain(firstApptTime);
   });
 
 });
