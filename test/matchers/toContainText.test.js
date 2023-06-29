@@ -22,6 +22,18 @@ describe("toContainText matcher", () => {
         expect(stripTerminalColor(result.message())).toContain(`expect(element).toContainText("text to find")`);
     });
 
+    it("returns a message that contains the source line if negated match", () => {
+        const domElement = {textContent: "text to find"};
+        const result = toContainText(domElement, "text to find");
+        expect(stripTerminalColor(result.message())).toContain(`expect(element).not.toContainText("text to find")`);
+    });
+
+    it("returns a message that contains the actual text", () => {
+        const domElement = {textContent: "text to find"};
+        const result = toContainText(domElement, "text to find");
+        expect(stripTerminalColor(result.message())).toContain(`Actual text: "text to find"`);
+    });
+
 });
 
 
